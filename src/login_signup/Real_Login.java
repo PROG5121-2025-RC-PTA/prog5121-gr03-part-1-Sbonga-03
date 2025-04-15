@@ -8,11 +8,15 @@ package login_signup;
  *
  * @author RC_Student_lab
  */
-public class Real_Login extends javax.swing.JFrame {
+import javax.swing.JOptionPane;
 
-    /**
-     * Creates new form Real_Login
-     */
+public class Real_Login extends javax.swing.JFrame {
+    
+     // Declare arrays and counter
+    private String[] usernames = new String[10];
+    private String[] passwords = new String[10];
+    private int userCount = 0;
+  
     public Real_Login() {
         initComponents();
     }
@@ -173,10 +177,36 @@ public class Real_Login extends javax.swing.JFrame {
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         // TODO add your handling code here:
+       // Get entered username and password
+    String inputUsername = jTextField1.getText();
+    String inputPassword = new String(jPasswordField1.getPassword());
+
+    //  testing
+    usernames[0] = "kyl_1";
+    passwords[0] = "Ch&&sec@ke99!";
+    userCount = 1;
+
+    boolean found = false;
+
+    for (int i = 0; i < userCount; i++) {
+        if (usernames[i] != null && passwords[i] != null &&
+            usernames[i].equals(inputUsername) && passwords[i].equals(inputPassword)) {
+            found = true;
+            break;
+        }
+    }
+
+    if (found) {
+        JOptionPane.showMessageDialog(this, "Login successful!");
+        // Continue to next screen or functionality
+    } else {
+        JOptionPane.showMessageDialog(this, "Invalid username or password.\nPlease try again");
+    }
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
@@ -202,3 +232,9 @@ public class Real_Login extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
+
+
+
+
+                     //OpenAl.(2025).ChatGBT[Large language model].
+                    //Avalible at : https://chat.openai.com (Accessed 10 April 2025)

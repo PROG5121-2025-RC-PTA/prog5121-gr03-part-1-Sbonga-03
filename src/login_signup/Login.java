@@ -10,16 +10,33 @@ import javax.swing.JOptionPane;
  *
  * @author RC_Student_lab
  */
+
+
 public class Login extends javax.swing.JFrame {
+    
+    static String[] userDetails = new String[3]; // [username, password, phone]
+    
+    // Arrays to store up to 10 users (can be increased)
+    private String[] usernames = new String[10];
+    private String[] passwords = new String[10];
+    private int userCount = 0; // Tracks how many users are stored
+
+    
+
 
     
     public Login() {
         initComponents();
+        jPasswordField1.setEnabled(false);
+         jPasswordField1.setEnabled(false);
+        jTextFieldPhone.setEnabled(false);
+        jButton1.setEnabled(false);
+        setLocationRelativeTo(null);
+
     }
+    // disable password field at start
+
     
-    
-    
-     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -34,9 +51,9 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        JTextField = new javax.swing.JTextField();
+        jTextFieldUsername = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldPhone = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -109,18 +126,18 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Password");
 
-        JTextField.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTextFieldActionPerformed(evt);
+                jTextFieldUsernameActionPerformed(evt);
             }
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Phone Number");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldPhone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jTextFieldPhoneActionPerformed(evt);
             }
         });
 
@@ -167,8 +184,8 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(85, 85, 85))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LeftLayout.createSequentialGroup()
@@ -189,7 +206,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -197,7 +214,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
@@ -231,87 +248,126 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        
-    }
-    
-    public static  boolean validateUsername(String username){
-       if (username.contains("_")&& username.length() <=5) {
-           JOptionPane.showMessageDialog(null,"Username successfully captured.");
-           return true;
-           
-       } 
-       else 
-       {
-           JOptionPane.showMessageDialog(null,"Username is not correctly formated.n/It must contain an underscore.n/It must be more than 5 characters. ");
-           return false;
-       }    
-    }//GEN-LAST:event_jButton1ActionPerformed
-   
-    public static boolean validatePassword(String password){
-        boolean hasCapitalLetter = password.matches(".*[A-Z].*");
-        boolean hasNumber = password.matches(".*[0-9].*");
-        boolean hasSpecialChar = password.matches(".*[!@#$%^&*()_+=\\-{}\\[\\]:;\"'<>,.?/\\\\|].*");
-        boolean isLongEnough = password.length() >= 8;   
-        
-        if (hasCapitalLetter && hasNumber && hasSpecialChar && isLongEnough ) {
-           JOptionPane.showMessageDialog(null,"Password successfully captured.");
-           return true;
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null,"Password is not correctly formatted.n/It must be at least 8 characters long.n/It must include a capital letter, a number, and a special character");
-            return false;
-        }
-    }
-    
-    public static boolean validatePhoneNumber(String phoneNumber){
-        boolean isValid = (phoneNumber.startsWith("+27") && phoneNumber.length() ==13)||
-                          (phoneNumber.startsWith("0") && phoneNumber.length() == 10 && phoneNumber.matches("[0-9]+"));
-          if (isValid){
-              return true;
-          }
-          else
-          {    
-           JOptionPane.showMessageDialog(null,"Invalid South African phone numbe.n/It must start with +27 or 0 and be the correct length");
-         return false;
-    }   
+    String username = jTextFieldUsername.getText().trim();
+String password = new String(jPasswordField1.getPassword());
+String phone = jTextFieldPhone.getText().trim();
+
+// Username validation
+if (!username.matches(".*_.*") || username.length() > 5) {
+    JOptionPane.showMessageDialog(this, "Username must contain an underscore and be no more than 5 characters long.");
+    return;
+}
+
+// Password validation
+if (!password.matches("^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*]).{8,}$")) {
+    JOptionPane.showMessageDialog(this, "Password is not correctly formatted.\nIt must be at least 8 characters, contain a capital letter, a number, and a special character.");
+    return;
+}
+
+// Phone number validation
+if (!phone.matches("^0\\d{9}$")) {
+    JOptionPane.showMessageDialog(this, "Phone number must be 10 digits and start with 0.");
+    return;
+}
+
+// Save user info
+if (userCount < usernames.length) {
+    usernames[userCount] = username;
+    passwords[userCount] = password;
+    userCount++;
+    JOptionPane.showMessageDialog(this, "Account created successfully!");
+
+    // Clear fields
+    jTextFieldUsername.setText("");
+    jPasswordField1.setText("");
+    jTextFieldPhone.setText("");
+} else {
+    JOptionPane.showMessageDialog(this, "User limit reached!");
 }
     
+
+     
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+
     
-    private void JTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextFieldActionPerformed
+    
+    private void jTextFieldUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsernameActionPerformed
         // TODO add your handling code here:
+        String username = jTextFieldUsername.getText().trim();
+
+    if (username.contains("_") && username.length() <= 5) {
+        JOptionPane.showMessageDialog(this, "Username successfully captured.");
+        jPasswordField1.setEnabled(true); 
+        jPasswordField1.requestFocus();  
+    } else {
+        JOptionPane.showMessageDialog(this, "Username is not correctly formatted.\nIt must contain an underscore and be no more than 5 characters.");
+        jPasswordField1.setEnabled(false); 
+    }
         
-        //Username text Filed
         
         
        
         
-    }//GEN-LAST:event_JTextFieldActionPerformed
+    }//GEN-LAST:event_jTextFieldUsernameActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Real_Login LoginFrame = new Real_Login();
-        LoginFrame.setVisible(true);
-        LoginFrame.pack();
-        LoginFrame.setLocationRelativeTo(null);
-        this.dispose();
+    Real_Login LoginFrame = new Real_Login();
+    LoginFrame.setVisible(true);
+    LoginFrame.pack();
+    LoginFrame.setLocationRelativeTo(null);
+    this.dispose();
+
+    
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jTextFieldPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPhoneActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    String phone = jTextFieldPhone.getText().trim();
+
+    if (phone.matches("\\d{10}")) {
+        JOptionPane.showMessageDialog(this, "Phone number successfully captured.");
+        jButton1.setEnabled(true); // Enable Create Account button
+        jButton1.requestFocus();
+    } else {
+        JOptionPane.showMessageDialog(this, "Invalid phone number.");
+        jButton1.setEnabled(false);
+        jTextFieldPhone.setText("");
+        jTextFieldPhone.requestFocus();
+    }   
+    }//GEN-LAST:event_jTextFieldPhoneActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
+     String password = new String(jPasswordField1.getPassword());
+
+    boolean hasUpper = password.matches(".*[A-Z].*");
+    boolean hasDigit = password.matches(".*\\d.*");
+    boolean hasSpecial = password.matches(".*[!@#$%^&*(),.?\":{}|<>].*");
+
+    if (password.length() >= 8 && hasUpper && hasDigit && hasSpecial) {
+        JOptionPane.showMessageDialog(this, "Password successfully captured.");
+        jTextFieldPhone.setEnabled(true); // Enable phone number
+        jTextFieldPhone.requestFocus();
+    } else {
+        JOptionPane.showMessageDialog(this, "Password is not correctly formatted.\nIt must be at least 8 characters long and include:\n- A capital letter\n- A number\n- A special character");
+        jTextFieldPhone.setEnabled(false);
+        jPasswordField1.setText("");
+        jPasswordField1.requestFocus();
+    }  
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
+    
+     public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(() -> new Login().setVisible(true));
+    }
     /**
      * @param args the command line arguments
      */
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField JTextField;
     private javax.swing.JPanel Left;
     private javax.swing.JPanel Right;
     private javax.swing.JButton jButton1;
@@ -327,6 +383,12 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldPhone;
+    private javax.swing.JTextField jTextFieldUsername;
     // End of variables declaration//GEN-END:variables
 }
+
+
+
+                    //OpenAl.(2025).ChatGBT[Large language model].
+                    //Avalible at : https://chat.openai.com (Accessed 10 April 2025)
